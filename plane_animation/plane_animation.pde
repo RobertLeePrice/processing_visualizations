@@ -8,13 +8,21 @@
  * the constant value settings. The goal is to destroy all
  * NPC aircraft before they reach the end of the map. 
  */
+ 
+ /** 
+ * Questions
+ * 1. Dynamic cloud generation with a shape object. 
+ * 2. Bounding boxes changing with angle of rotation.
+ * 3. Looping for bullet / plane collision detection.
+ * 4. Random path generation.
+ **/
 
 // control constants 
 int NUM_TREES = 20;
 int NUM_CLOUDS = 12;
 int NUM_MOUNTAINS = 2;
 int NUM_ZEPPELINS = 6;
-boolean SHOW_BOUNDING_BOX = false;
+boolean SHOW_BOUNDING_BOX = true;
 
 // colors 
 color skyColor = #53E8FC;
@@ -199,6 +207,10 @@ void checkCollision() {
         
         // calculate remaining health
         target.health -= 1;
+        
+        if (target.health < 1) {
+          target.is_active = false; 
+        }
               
         // remove bullet if collision is detected
         bullets.remove(i);
