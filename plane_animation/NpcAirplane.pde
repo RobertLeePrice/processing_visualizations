@@ -53,14 +53,16 @@ class NpcAirplane {
     imageMode(CENTER);
     pushMatrix();
     
+    translate(xpos, ypos);
+    rotate(theta);
+    
     if (SHOW_BOUNDING_BOX) {
       stroke(#e74c3c);
       noFill();
       rect(xpos - AIRCRAFT_NPC.width / 2, ypos - AIRCRAFT_NPC.height / 2, AIRCRAFT_NPC.width, AIRCRAFT_NPC.height);
     }
 
-    translate(xpos, ypos);
-    rotate(theta);
+    // set to aircraft width and height
     image(AIRCRAFT_NPC, 0, 0);
     
     popMatrix();

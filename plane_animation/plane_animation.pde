@@ -15,6 +15,9 @@
  * 2. Bounding boxes changing with angle of rotation.
  * 3. Looping for bullet / plane collision detection.
  * 4. Random path generation.
+ * curveVertex(beginShape, endShape), 
+ * curveDetail, curvePoint - extract points off curve
+ * align plane along path with atan2 theta is angle of rotation
  **/
 
 // control constants 
@@ -22,7 +25,7 @@ int NUM_TREES = 20;
 int NUM_CLOUDS = 12;
 int NUM_MOUNTAINS = 2;
 int NUM_ZEPPELINS = 6;
-boolean SHOW_BOUNDING_BOX = true;
+boolean SHOW_BOUNDING_BOX = false;
 
 // colors 
 color skyColor = #53E8FC;

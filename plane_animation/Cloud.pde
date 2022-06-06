@@ -10,6 +10,7 @@ class Cloud {
     ypos = y;
     cloudWidth = random(cloudMinWidth, cloudMaxWidth);
     cloudHeight = random(cloudMinHeight, cloudMaxHeight);
+    // use array of pvectors for widths & heights
   } 
   
   // call update functions
@@ -25,6 +26,7 @@ class Cloud {
     ellipse(xpos, ypos, cloudWidth, cloudHeight); 
      
     // cloud circles
+    // cycle through arrays 
     //for (int i = 0; i < numCircles; i++) {
     //  //randomSeed(i);
     //  float cX = xpos + random(-cloudWidth, cloudWidth);
