@@ -19,13 +19,20 @@
  * curveDetail, curvePoint - extract points off curve
  * align plane along path with atan2 theta is angle of rotation
  **/
+ 
+ /**
+ * TODO
+ * 1. Update Questions
+ * 2. Player Score
+ * 3. Start Game Countdown
+ **/
 
 // control constants 
 int NUM_TREES = 20;
 int NUM_CLOUDS = 12;
 int NUM_MOUNTAINS = 2;
 int NUM_ZEPPELINS = 6;
-boolean SHOW_BOUNDING_BOX = false;
+boolean SHOW_BOUNDING_BOX = true;
 
 // colors 
 color skyColor = #53E8FC;
@@ -62,6 +69,8 @@ float groundSpeed = 1;
 // NPC plane constants
 PImage AIRCRAFT_NPC;
 String AIRCRAFT_NPC_IMG = "biplane_yellow.png";
+float AIRCRAFT_NPC_WIDTH;
+float AIRCRAFT_NPC_HEIGHT;
 int damageMax = 8;
 float waveAmplitude = 60;
 float waveLength = 275;
@@ -83,11 +92,14 @@ int zeppelinMaxHealth = 10;
 // controlled plane constants
 PImage AIRCRAFT_PLAYER;
 String AIRCRAFT_PLAYER_IMG = "biplane_red.png";
+float AIRCRAFT_PLAYER_WIDTH;
+float AIRCRAFT_PLAYER_HEIGHT;
+float AIRCRAFT_PLAYER_MIN_SPEED = 1.1;
+float AIRCRAFT_PLAYER_MAX_SPEED = 3.4;
 float playerStartPositionX = -100;
 float playerStartPositionY = 50;
-float playerSpeed = 0.2;
 float speedIncrement = 0.1;
-float speedEasing = 0.01;
+float speedEasing = 0.03;
 float bulletVelocity = 4;
 
 // generate target object
@@ -113,8 +125,17 @@ void setup() {
   background(skyColor);
   size(800, 500);
   
+  // load NPC aircraft
   AIRCRAFT_NPC = loadImage(AIRCRAFT_NPC_IMG);
+  //AIRCRAFT_NPC_WIDTH = AIRCRAFT_NPC.width;
+  //AIRCRAFT_NPC_HEIGHT = AIRCRAFT_NPC.height;
+  
+  // load player aircraft
   AIRCRAFT_PLAYER = loadImage(AIRCRAFT_PLAYER_IMG);
+  //AIRCRAFT_PLAYER_WIDTH = AIRCRAFT_PLAYER.width;
+  //AIRCRAFT_PLAYER_HEIGHT = AIRCRAFT_PLAYER.height;
+  
+  // load NPC zeppelins
   AIRCRAFT_ZEPPELIN = loadImage(AIRCRAFT_ZEPPELIN_IMG);
   
   // initialize mountains
@@ -231,7 +252,7 @@ void checkCollision() {
           // calculate remaining health
           z.health -= 1;
           
-          if (z.health < 1) {
+          if (z.health < 1) {    
             z.is_active = false; 
           }
                 
@@ -244,13 +265,21 @@ void checkCollision() {
   
 }
 
-void mouseClicked() {
+void addBullet() {
   bullets.add(
     new Bullet(
-    player.xpos, 
-    player.ypos, 
-    mouseX, 
-    mouseY, 
+    player.barrelX, 
+    player.barrelY, 
+    player.targetX, 
+    player.targetY, 
     bulletVelocity)
   );
+}
+
+void keyPressed() {
+  if (key==' ') addBullet();
+}
+
+void mouseClicked() {
+  addBullet();
 }

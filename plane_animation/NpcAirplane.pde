@@ -50,7 +50,8 @@ class NpcAirplane {
   
   // update render step
   void render() {
-    imageMode(CENTER);
+    //imageMode(CENTER);
+    
     pushMatrix();
     
     translate(xpos, ypos);
@@ -59,11 +60,10 @@ class NpcAirplane {
     if (SHOW_BOUNDING_BOX) {
       stroke(#e74c3c);
       noFill();
-      rect(xpos - AIRCRAFT_NPC.width / 2, ypos - AIRCRAFT_NPC.height / 2, AIRCRAFT_NPC.width, AIRCRAFT_NPC.height);
+      rect(-AIRCRAFT_NPC.width, -AIRCRAFT_NPC.height, AIRCRAFT_NPC.width, AIRCRAFT_NPC.height);
     }
 
-    // set to aircraft width and height
-    image(AIRCRAFT_NPC, 0, 0);
+    image(AIRCRAFT_NPC, -AIRCRAFT_NPC.width / 2, -AIRCRAFT_NPC.height / 2);
     
     popMatrix();
     

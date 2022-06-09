@@ -2,8 +2,9 @@ class PlayerAirplane {
   
   // static variables
   float xpos, ypos, dx, dy, speed, theta;
-  float targetX;
-  float targetY;
+  float targetX, targetY;
+  float barrelX, barrelY;
+  float radius = 50;
   
   // constructor
   PlayerAirplane(float x, float y, float s) {
@@ -23,13 +24,11 @@ class PlayerAirplane {
   void simulate() {
     
     // calculate X position
-    targetX = mouseX;
-    dx = targetX - xpos;
+    dx = mouseX - xpos;
     xpos += dx * speedEasing * speed;
     
     // calculate Y position
-    targetY = mouseY;
-    dy = targetY - ypos;
+    dy = mouseY - ypos;
     ypos += dy * speedEasing * speed;
     
     // calculate aircraft angle
@@ -53,18 +52,28 @@ class PlayerAirplane {
   
   // update render step
   void render() {
-    imageMode(CENTER);
+    
+    // calculate barrel position
+    barrelX = xpos + (AIRCRAFT_PLAYER.width / 4) * sin(theta);
+    barrelY = ypos - (AIRCRAFT_PLAYER.height / 2) * cos(theta);
+
+    // calculate target position
+    targetX = xpos + width * cos(theta);
+    targetY = ypos / 2 + height * sin(theta);
+    
+    // update aircraft position
     pushMatrix();
-        
+    
+    translate(xpos, ypos);
+    rotate(theta);
+    
     if (SHOW_BOUNDING_BOX) {
       stroke(#e74c3c);
       noFill();
-      rect(xpos - AIRCRAFT_PLAYER.width / 2, ypos - AIRCRAFT_PLAYER.height / 2, AIRCRAFT_PLAYER.width, AIRCRAFT_PLAYER.height);
+      rect(-AIRCRAFT_PLAYER.width, -AIRCRAFT_PLAYER.height, AIRCRAFT_PLAYER.width, AIRCRAFT_PLAYER.height);
     }
 
-    translate(xpos, ypos);
-    rotate(theta);
-    image(AIRCRAFT_PLAYER, 0, 0);
+    image(AIRCRAFT_PLAYER, -AIRCRAFT_PLAYER.width / 2, -AIRCRAFT_PLAYER.height / 2);
     
     popMatrix();
  
