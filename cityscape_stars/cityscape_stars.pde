@@ -45,10 +45,10 @@ void draw() {
   fill(SKY_COLOR, 100);
   rect(0, 0, width, height);
   
-  //noStroke();
-  //fill(#FEF9A8, light_pollution);
-  //ellipse(width / 2, height, width + 300, height + 80);
-  
+  noStroke();
+  fill(#FEF9A8, light_pollution);
+  ellipse(width / 2, height, width + 300, height + 80);
+    
   for (int i = 0; i < num_stars; i++) {
     Star s = stars.get(i);
     s.update(star_alpha);
@@ -72,14 +72,16 @@ void draw() {
     skyscraper_birth_rate += 0.001;
   }
  
- noStroke();
- fill(GROUND_COLOR);
- rect(0, GROUND_HEIGHT, width, 60);
- 
- if (light_pollution < 150) {
-   light_pollution += light_pollution_rate;
-   light_pollution_rate += 0.001;
- }
+   noStroke();
+   fill(GROUND_COLOR);
+   rect(0, GROUND_HEIGHT, width, 60);
+   
+   if (star_alpha < 60) {
+      if (light_pollution < 150) {
+       light_pollution += light_pollution_rate;
+       light_pollution_rate += 0.001;
+     }
+   }
 
  
 }

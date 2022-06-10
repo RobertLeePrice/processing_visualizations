@@ -32,7 +32,7 @@ int NUM_TREES = 20;
 int NUM_CLOUDS = 12;
 int NUM_MOUNTAINS = 2;
 int NUM_ZEPPELINS = 6;
-boolean SHOW_BOUNDING_BOX = true;
+boolean SHOW_BOUNDING_BOX = false;
 
 // colors 
 color skyColor = #53E8FC;
