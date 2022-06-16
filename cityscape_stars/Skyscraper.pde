@@ -19,7 +19,6 @@ class Skyscraper {
   }
   
   void update() {
-    //this.move();
     this.grow();
     this.render();
   }
@@ -35,6 +34,7 @@ class Skyscraper {
   void render() {
     pushMatrix();
     translate(x, GROUND_HEIGHT);
+    noStroke();
     fill(c);
     
     if (style == "RECT") {
